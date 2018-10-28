@@ -12,12 +12,71 @@ const Map = ReactMapboxGl(
         accessToken: "pk.eyJ1Ijoicm9tYWthdHNhIiwiYSI6ImNqbnJqd3FkZjA2Mmczb2xrMHliZmgxeTIifQ.AwLH4y3Et0uW2IeOgIAJDA"
     }
 );
+//
+// const json = {
+//     "type": "geojson",
+//     "data": {
+//         "type": "FeatureCollection",
+//         "features": [{
+//             "type": "Feature",
+//             "geometry": {
+//                 "type": "Point",
+//                 "coordinates": [-77.03238901390978, 38.913188059745586]
+//             },
+//             "properties": {
+//                 "title": "Tordlo",
+//                 "description": "Bring me the best tordlo in the Universe",
+//                 "amount": "14.88 ETH (3000 USD)"
+//             }
+//         }, {
+//             "type": "Feature",
+//             "geometry": {
+//                 "type": "Point",
+//                 "coordinates": [-122.414, 37.776]
+//             },
+//             "properties": {
+//                 "title": "Dick Suck",
+//                 "description": "Sucking a dick for 5 hours",
+//                 "amount": "0 ETH (0 USD)"
+//             }
+//         }]
+//     }
+// }
 
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            screams: {
+                type: "geojson",
+                data: {
+                    type: "FeatureCollection",
+                    features: [{
+                        type: "Feature",
+                        geometry: {
+                            type: "Point",
+                            coordinates: [-77.03238901390978, 38.913188059745586]
+                        },
+                        properties: {
+                            title: "Tordlo",
+                            description: "Bring me the best tordlo in the Universe",
+                            amount: "14.88 ETH (3000 USD)"
+                        }
+                    }, {
+                        type: "Feature",
+                        geometry: {
+                            type: "Point",
+                            coordinates: [-122.414, 37.776]
+                        },
+                        properties: {
+                            title: "Dick Suck",
+                            description: "Sucking a dick for 5 hours",
+                            amount: "0 ETH (0 USD)"
+                        }
+                    }]
+                }
+            },
             showScreamInputForm: false,
             newScream: true,
             showPopup: false,
@@ -31,6 +90,7 @@ class App extends Component {
         };
         this.updateShowScreamInputForm = this.updateShowScreamInputForm.bind(this);
         this._onClickMap = this._onClickMap.bind(this);
+        this.addScream = this.addScream.bind(this);
     }
 
     updateShowScreamInputForm(newShow) {
@@ -63,42 +123,45 @@ class App extends Component {
                       });
     }
 
-    render() {
-        const json = {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [-77.03238901390978, 38.913188059745586]
-                    },
-                    "properties": {
-                        "title": "Tordlo",
-                        "description": "Bring me the best tordlo in the Universe",
-                        "amount": "14.88 ETH (3000 USD)"
-                    }
-                }, {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [-122.414, 37.776]
-                    },
-                    "properties": {
-                        "title": "Dick Suck",
-                        "description": "Sucking a dick for 5 hours",
-                        "amount": "0 ETH (0 USD)"
-                    }
-                }]
-            }
-        };
+    addScream(title, description, amount) {
 
+        console.log(title);
+        console.log(description);
+        console.log(amount);
+
+        this.setState(prevState => ({
+            ...prevState,
+            screams: {
+                ...prevState.screams,
+                data: {
+                    ...prevState.screams.data,
+                    features: [
+                        ...prevState.screams.data.features,
+                        {
+                            type: "Feature",
+                            geometry: {
+                                type: "Point",
+                                coordinates: this.state.center,
+                            },
+                            properties: {
+                                title: title,
+                                description: description,
+                                amount: amount
+                            }
+                        }
+                    ]
+                }
+            }
+        }));
+        console.log(this.state.screams);
+    }
+
+    render() {
         return (
             <div>
                 <Map
                     key={"map"}
-                    style={"mapbox://styles/romakatsa/cjnrxz3yh0qa12rpsbne9h43s"}
+                    style={"mapbox://styles/romakatsa/cjnsma1oq31xf2stevzztlyrw"}
                     onClick={this._onClickMap}
                     onMouseMove={this._onMouseMoveMap}
                     containerStyle={{
@@ -110,10 +173,11 @@ class App extends Component {
                 >
                     <ScaleControl/>
                     <ZoomControl/>
-                    <MapPin jsonData={json}/>
+                    <MapPin jsonData={this.state.screams}/>
                 </Map>
                 <ScreamBar showScreamInputForm={this.state.showScreamInputForm}
                            updateShowScreamInputForm={this.updateShowScreamInputForm}
+                           handleScreamClick={this.addScream}
                 />
                 {this.state.showPopup ? <PinPopup key={1} scream={this.state.scream}/> : ""}
                 {this.state.newScream ? <PinMarker/> : ""}

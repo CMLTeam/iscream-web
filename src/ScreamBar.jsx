@@ -1,6 +1,15 @@
 import React, {Component} from "react";
 
 export class ScreamBar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.titleInput = null;
+        this.descriptionInput = null;
+        this.amountInput = null;
+    }
+
+
     render() {
         return (
             <div style={this.props.showScreamInputForm
@@ -12,23 +21,36 @@ export class ScreamBar extends Component {
                            style={ScreamBar.styles.textInput}
                            placeholder="What do you scream for?"
                            onFocus={() => this.props.updateShowScreamInputForm(true)}
+                           ref={(ref) => {
+                               this.titleInput = ref;
+                           }}
                     />
                     {this.props.showScreamInputForm
                         ? (
                             <div>
                                 <textarea style={ScreamBar.styles.textArea}
                                           placeholder="Please provide the details of your emergency"
+                                          ref={(ref) => {
+                                              this.descriptionInput = ref;
+                                          }}
                                 />
                                 <input type="number"
                                        style={ScreamBar.styles.textInput}
                                        placeholder="Amount in ETH you are willing to pay for it"
+                                       ref={(ref) => {
+                                           this.amountInput = ref;
+                                       }}
                                 />
                             </div>
 
                         )
                         : null}
                 </div>
-                <button style={ScreamBar.styles.topBarButton}>SCREAM</button>
+                <button style={ScreamBar.styles.topBarButton}
+                        onClick={() => this.props.handleScreamClick(this.titleInput.value,
+                                                                    this.descriptionInput.value,
+                                                                    this.amountInput.value)}>
+                    SCREAM</button>
             </div>
         )
     }
