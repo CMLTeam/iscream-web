@@ -7,6 +7,7 @@ export class ScreamBar extends Component {
         this.titleInput = null;
         this.descriptionInput = null;
         this.amountInput = null;
+        this.statusImLink = null;
     }
 
 
@@ -28,6 +29,14 @@ export class ScreamBar extends Component {
                     {this.props.showScreamInputForm
                         ? (
                             <div>
+                                <input type="text"
+                                       style={ScreamBar.styles.textInput}
+                                       placeholder="What's your Status.im userlink?"
+                                       onFocus={() => this.props.updateShowScreamInputForm(true)}
+                                       ref={(ref) => {
+                                           this.statusImLink = ref;
+                                       }}
+                                />
                                 <textarea style={ScreamBar.styles.textArea}
                                           placeholder="Please provide the details of your emergency"
                                           ref={(ref) => {
@@ -50,7 +59,8 @@ export class ScreamBar extends Component {
                 <button style={ScreamBar.styles.topBarButton}
                         onClick={() => this.props.handleScreamClick(this.titleInput.value,
                                                                     this.descriptionInput.value,
-                                                                    this.amountInput.value)}>
+                                                                    this.amountInput.value,
+                                                                    this.statusImLink.value)}>
                     SCREAM</button>
             </div>
         )
@@ -131,7 +141,7 @@ ScreamBar.styles = {
         "left": "50%",
         "transform": "translate(-50%)",
         "width": "80%",
-        "height": "9rem",
+        "height": "12rem",
         "display": "flex",
         "justifyContent": "space-between",
         "alignItems": "center",
