@@ -3,6 +3,7 @@ import ReactMapboxGl, {Layer, Feature, Source} from "react-mapbox-gl";
 import './App.css';
 import MapPin from "./MapPin";
 import PinPopup from "./PinPopup";
+import PinMarker from "./PinMarker";
 
 
 const Map = ReactMapboxGl(
@@ -15,6 +16,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            newScream: true,
             showPopup: false,
             scream: {
                 title : "",
@@ -95,6 +97,7 @@ class App extends Component {
                     <MapPin jsonData={json}/>
                 </Map>
                 {this.state.showPopup ? <PinPopup key={1} scream={this.state.scream}/> : ""}
+                {this.state.newScream? <PinMarker/> :""}
             </div>
         );
     }

@@ -9,9 +9,7 @@ class PinPopup extends Component {
         super(props);
     }
 
-
     render() {
-
         return (
             <div style={{
                 position:"absolute",
