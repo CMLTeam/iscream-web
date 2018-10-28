@@ -1,35 +1,30 @@
 import React, {Component} from "react";
 
 export class ScreamBar extends Component {
-    constructor(state) {
-        super(state);
-        this.state = {
-            showScreamInputForm: false
-        }
-    }
-
     render() {
         return (
-            <div style={this.state.showScreamInputForm
+            <div style={this.props.showScreamInputForm
                 ? ScreamBar.styles.topBarHigh
                 : ScreamBar.styles.topBarShort}
-                 onBlur={() => {
-                     this.setState({showScreamInputForm: false});
-                 }}
             >
                 <div style={ScreamBar.styles.textInputWrapper}>
                     <input type="text"
                            style={ScreamBar.styles.textInput}
-                           placeholder="AAAAAAAAAAAAa"
-                           onFocus={() => {
-                               this.setState({showScreamInputForm: true});
-                           }}
-                           onBlur={(e) => e.stopPropagation()}/>
-                    {this.state.showScreamInputForm
+                           placeholder="What do you scream for?"
+                           onFocus={() => this.props.updateShowScreamInputForm(true)}
+                    />
+                    {this.props.showScreamInputForm
                         ? (
-                            <input type="text"
-                                   style={ScreamBar.styles.textInput}
-                                   placeholder="AAAAAAAAAAAAa"/>
+                            <div>
+                                <textarea style={ScreamBar.styles.textInput}
+                                          placeholder="Please provide the details of your emergency"
+                                />
+                                <input type="number"
+                                       style={ScreamBar.styles.textInput}
+                                       placeholder="Amount in ETH you are willing to pay for it"
+                                />
+                            </div>
+
                         )
                         : null}
                 </div>
@@ -42,10 +37,11 @@ export class ScreamBar extends Component {
 ScreamBar.styles = {
     textInput: {
         "background-color": "#e5e5e5",
-        "width": "80%",
+        "width": "98%",
         "outline": "none",
         "font-size": "1rem",
-        "margin": "10px 10px 10px 10px",
+        "padding": ".5rem 0",
+        "margin": "0 1%",
         "border": "0",
         "border-bottom": "2px",
         "border-style": "solid",

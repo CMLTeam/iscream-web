@@ -9,21 +9,39 @@ const Map = ReactMapboxGl(
     });
 
 
-
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showScreamInputForm: false
+        };
+        this.updateShowScreamInputForm = this.updateShowScreamInputForm.bind(this);
+    }
+
+    updateShowScreamInputForm(newShow) {
+        this.setState({showScreamInputForm: newShow});
+    }
+
     render() {
         return (
-            <Map
-                style="mapbox://styles/mapbox/streets-v9"
-                containerStyle={{
-                    height: "100vh",
-                    width: "100vw"
-                }}
-            >
-                <ScaleControl/>
-                <ZoomControl/>
-                <ScreamBar/>
-            </Map>
+            <div>
+                <div>
+                    <Map
+                        style="mapbox://styles/mapbox/streets-v9"
+                        containerStyle={{
+                            height: "100vh",
+                            width: "100vw"
+                        }}
+                        onClick={() => this.updateShowScreamInputForm(false)}
+                    >
+                        <ScaleControl/>
+                        <ZoomControl/>
+                    </Map>
+                </div>
+                <ScreamBar showScreamInputForm={this.state.showScreamInputForm}
+                           updateShowScreamInputForm={this.updateShowScreamInputForm}
+                />
+            </div>
         );
     }
 }
