@@ -20,6 +20,7 @@ export class ScreamBar extends Component {
                                           placeholder="Please provide the details of your emergency"
                                 />
                                 <input type="number"
+                                       step="0.0000001"
                                        style={ScreamBar.styles.textInput}
                                        placeholder="Amount in ETH you are willing to pay for it"
                                 />
