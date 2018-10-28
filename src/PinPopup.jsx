@@ -13,12 +13,25 @@ class PinPopup extends Component {
     render() {
 
         return (
-            <Popup coordinates={[-0.13235092163085938,51.518250335096376]}
-                              offset={{
-                                  'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-                              }}>
-                <h3>{this.props.title}</h3>
-            </Popup>
+            <div style={{
+                position:"absolute",
+                maxWidth:"600px",
+                width:"90%",
+                zIndex:"10",
+                backgroundColor:"white",
+                opacity:"0.8",
+                top: "20%",
+                left:"0",
+                right:"0",
+                margin:"auto"
+            }}>
+                <h2>{this.props.scream.title}</h2>
+                <p>{this.props.scream.description}</p>
+                <p>{this.props.scream.amount}</p>
+                <a href="https://get.status.im/user/0x044d6956479643d6289144a1df359e1301ebbdc3be33a9df8a8bb5983ddb39f1a04e8f5a13c7fccdd735cb9cdedfb2d7a982291dd5ebe15839855487925137861c"
+                    target="_blank"
+                >Negotiate</a>
+            </div>
         );
     }
 }

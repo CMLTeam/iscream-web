@@ -5,6 +5,10 @@ import MapPin from "./MapPin";
 import PinPopup from "./PinPopup";
 
 
+const Map = ReactMapboxGl(
+    {
+        accessToken: "pk.eyJ1Ijoicm9tYWthdHNhIiwiYSI6ImNqbnJqd3FkZjA2Mmczb2xrMHliZmgxeTIifQ.AwLH4y3Et0uW2IeOgIAJDA"
+    });
 
 class App extends Component {
 
@@ -12,12 +16,17 @@ class App extends Component {
         super(props);
         this.state = {
             showPopup: false,
-            popupTitle: "",
+            scream: {
+                title : "",
+                description: "",
+                amount: ""
+            },
             zoom: [17],
             center: [-87.63097788775872, 41.767174164037044]
         };
         this._onClickMap= this._onClickMap.bind(this);
     }
+
 
     _onMouseMoveMap(map, e) {
         let features = map.queryRenderedFeatures(e.point, { layers: ['layer_id'] });
@@ -30,18 +39,15 @@ class App extends Component {
             return;
         }
         let feature = features[0];
-        console.log(feature.properties.description)
-        this.setState({showPopup: true, popupTitle: feature.properties.title})
+        console.log(feature.properties.description);
+        this.setState({showPopup: true,
+                        center: feature.geometry.coordinates,
+                          scream:  {title: feature.properties.title,
+                                    description: feature.properties.description,
+                                    amount: feature.properties.amount}});
     }
 
     render() {
-
-        const Map = ReactMapboxGl(
-            {
-                accessToken: "pk.eyJ1Ijoicm9tYWthdHNhIiwiYSI6ImNqbnJqd3FkZjA2Mmczb2xrMHliZmgxeTIifQ.AwLH4y3Et0uW2IeOgIAJDA"
-            });
-
-
         const json = {
             "type": "geojson",
             "data": {
@@ -73,17 +79,23 @@ class App extends Component {
         };
 
         return (
-            <Map
-                style={"mapbox://styles/romakatsa/cjnrxz3yh0qa12rpsbne9h43s"}
-                onClick={this._onClickMap}
-                onMouseMove={this._onMouseMoveMap}
-                containerStyle={{
-                    height: "100vh",
-                    width: "100vw"
-                }}
-            >
-                <MapPin jsonData={json}/>
-            </Map>
+            <div>
+                <Map
+                    key = {"map"}
+                    style={"mapbox://styles/romakatsa/cjnrxz3yh0qa12rpsbne9h43s"}
+                    onClick={this._onClickMap}
+                    onMouseMove={this._onMouseMoveMap}
+                    containerStyle={{
+                        height: "100vh",
+                        width: "100vw"
+                    }}
+                    center={this.state.center}
+                    zoom={this.state.zoom}
+                >
+                    <MapPin jsonData={json}/>
+                </Map>
+                {this.state.showPopup ? <PinPopup key={1} scream={this.state.scream}/> : ""}
+            </div>
         );
     }
 }

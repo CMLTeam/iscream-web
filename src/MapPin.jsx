@@ -47,7 +47,6 @@ class MapPin extends Component {
                 sourceId="source_id"
                     >
                     </Layer>
-
             </React.Fragment>
         );
     }
