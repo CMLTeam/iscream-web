@@ -6,7 +6,8 @@ import {ScreamBar} from "./ScreamBar";
 const Map = ReactMapboxGl(
     {
         accessToken: "pk.eyJ1Ijoicm9tYWthdHNhIiwiYSI6ImNqbnJqd3FkZjA2Mmczb2xrMHliZmgxeTIifQ.AwLH4y3Et0uW2IeOgIAJDA"
-    });
+    }
+);
 
 
 class App extends Component {

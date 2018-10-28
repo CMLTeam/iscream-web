@@ -16,7 +16,7 @@ export class ScreamBar extends Component {
                     {this.props.showScreamInputForm
                         ? (
                             <div>
-                                <textarea style={ScreamBar.styles.textInput}
+                                <textarea style={ScreamBar.styles.textArea}
                                           placeholder="Please provide the details of your emergency"
                                 />
                                 <input type="number"
@@ -36,50 +36,69 @@ export class ScreamBar extends Component {
 
 ScreamBar.styles = {
     textInput: {
-        "background-color": "#e5e5e5",
+        "backgroundColor": "#e5e5e5",
         "width": "98%",
         "outline": "none",
-        "font-size": "1rem",
+        "fontSize": "1rem",
         "padding": ".5rem 0",
         "margin": "0 1%",
         "border": "0",
-        "border-bottom": "2px",
-        "border-style": "solid",
-        "border-color": "#d3d3d3",
-        "box-sizing": "border-box",
+        "borderBottom": "2px",
+        "borderStyle": "solid",
+        "borderColor": "#d3d3d3",
+        "boxSizing": "border-box",
         ":focus": {
             "border": "0",
-            "border-bottom": "2px",
-            "border-style": "solid",
-            "border-color": "#3770c6"
+            "borderBottom": "2px",
+            "borderStyle": "solid",
+            "borderColor": "#3770c6"
+        }
+    },
+    textArea: {
+        "backgroundColor": "#e5e5e5",
+        "width": "98%",
+        "outline": "none",
+        "fontSize": "1rem",
+        "padding": ".5rem 0",
+        "margin": "0 1%",
+        "border": "0",
+        "borderBottom": "2px",
+        "borderStyle": "solid",
+        "borderColor": "#d3d3d3",
+        "boxSizing": "border-box",
+        ":focus": {
+            "border": "0",
+            "borderBottom": "2px",
+            "borderStyle": "solid",
+            "borderColor": "#3770c6"
         }
     },
     textInputWrapper: {
-        "border-width": "1px 0 1px 1px",
-        "border-style": "solid",
-        "border-color": "#3770c6",
-        "background-color": "#e5e5e5",
+        "borderWidth": "1px 0 1px 1px",
+        "borderStyle": "solid",
+        "borderColor": "#3770c6",
+        "backgroundColor": "#e5e5e5",
         "height": "100%",
         "width": "100%",
-        "border-radius": "6px 0 0 6px",
-        "box-sizing": "border-box",
+        "borderRadius": "6px 0 0 6px",
+        "boxSizing": "border-box",
         ":hover": {
-            "background-color": "#d1d1d1"
+            "backgroundColor": "#d1d1d1"
         }
     },
     topBarButton: {
-        "border-width": "1px 1px 1px 0",
-        "border-style": "solid",
-        "border-color": "#3770c6",
-        "background-color": "rgb(84, 152, 255)",
+        "borderWidth": "1px 1px 1px 0",
+        "borderStyle": "solid",
+        "borderColor": "#3770c6",
+        "backgroundColor": "rgb(84, 152, 255)",
         "height": "100%",
         "color": "white",
-        "border-radius": "0 6px 6px 0",
+        "borderRadius": "0 6px 6px 0",
         "cursor": "pointer",
-        "box-sizing": "border-box",
+        "boxSizing": "border-box",
         "outline": "none",
         ":hover": {
-            "background-color": "#3770c6"
+            "backgroundColor": "#3770c6"
         }
     },
     topBarHigh: {
@@ -88,11 +107,11 @@ ScreamBar.styles = {
         "top": "5%",
         "left": "50%",
         "transform": "translate(-50%)",
-        "width": "70%",
-        "height": "15rem",
+        "width": "80%",
+        "height": "9rem",
         "display": "flex",
-        "justify-content": "space-between",
-        "align-items": "center",
+        "justifyContent": "space-between",
+        "alignItems": "center",
         "padding": "0"
     },
     topBarShort: {
@@ -101,11 +120,11 @@ ScreamBar.styles = {
         "top": "5%",
         "left": "50%",
         "transform": "translate(-50%)",
-        "width": "70%",
+        "width": "80%",
         "height": "3rem",
         "display": "flex",
-        "justify-content": "space-between",
-        "align-items": "center",
+        "justifyContent": "space-between",
+        "alignItems": "center",
         "padding": "0"
     }
 };
