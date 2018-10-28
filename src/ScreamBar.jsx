@@ -12,16 +12,22 @@ export class ScreamBar extends Component {
                            style={ScreamBar.styles.textInput}
                            placeholder="What do you scream for?"
                            onFocus={() => this.props.updateShowScreamInputForm(true)}
+                           onInput={(e) => this.props.updateScreamTitle(e.target.value)}
+                           value={this.props.screamTitle}
                     />
                     {this.props.showScreamInputForm
                         ? (
                             <div>
                                 <textarea style={ScreamBar.styles.textArea}
                                           placeholder="Please provide the details of your emergency"
+                                          onInput={(e) => this.props.updateScreamDetails(e.target.value)}
+                                          value={this.props.screamDetails}
                                 />
                                 <input type="number"
                                        style={ScreamBar.styles.textInput}
                                        placeholder="Amount in ETH you are willing to pay for it"
+                                       onInput={(e) => this.props.updateScreamAmount(e.target.value)}
+                                       value={this.props.screamAmount}
                                 />
                             </div>
 

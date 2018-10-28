@@ -14,13 +14,31 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showScreamInputForm: false
+            showScreamInputForm: false,
+            screamTitle: "",
+            screamDetails: "",
+            screamAmount: 0
         };
         this.updateShowScreamInputForm = this.updateShowScreamInputForm.bind(this);
+        this.updateScreamTitle = this.updateScreamTitle.bind(this);
+        this.updateScreamDetails = this.updateScreamDetails.bind(this);
+        this.updateScreamAmount = this.updateScreamAmount.bind(this);
     }
 
     updateShowScreamInputForm(newShow) {
         this.setState({showScreamInputForm: newShow});
+    }
+
+    updateScreamTitle(newTitle) {
+        this.setState({screamTitle: newTitle});
+    }
+
+    updateScreamDetails(newDetails) {
+        this.setState({screamDetails: newDetails});
+    }
+
+    updateScreamAmount(newAmount) {
+        this.setState({screamAmount: newAmount});
     }
 
     render() {
@@ -41,6 +59,12 @@ class App extends Component {
                 </div>
                 <ScreamBar showScreamInputForm={this.state.showScreamInputForm}
                            updateShowScreamInputForm={this.updateShowScreamInputForm}
+                           updateScreamTitle={this.updateScreamTitle}
+                           updateScreamDetails={this.updateScreamDetails}
+                           updateScreamAmount={this.updateScreamAmount}
+                           screamTitle={this.state.screamTitle}
+                           screamDetails={this.state.screamDetails}
+                           screamAmount={this.state.screamAmount}
                 />
             </div>
         );
